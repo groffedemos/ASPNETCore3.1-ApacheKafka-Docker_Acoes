@@ -25,7 +25,7 @@ namespace APIAcoes
                 c.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
-                        Title = "Ações - Testes - Apache Kafka",
+                        Title = "Ações - Testes - Apache Kafka - TDC Floripa",
                         Version = "v1",
                         Description = "Exemplo de API REST criada com o ASP.NET Core 3.1 para o envio de dados de ações a um Tópico do Apache Kafka",
                         Contact = new OpenApiContact
