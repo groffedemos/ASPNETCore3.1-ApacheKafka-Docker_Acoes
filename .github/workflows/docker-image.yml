@@ -28,3 +28,14 @@ jobs:
         docker build . --file Dockerfile --tag ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.NOME_IMAGEM }}:$GITHUB_RUN_NUMBER
         docker tag ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.NOME_IMAGEM }}:$GITHUB_RUN_NUMBER ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.NOME_IMAGEM }}:latest
         docker push ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.NOME_IMAGEM }}
+
+    - name: Logando no Azure para Deployment
+      uses: Azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Azure WebApp Container - Deployment da Aplicacao
+      uses: Azure/webapps-container-deploy@v1
+      with:
+        app-name: ${{ secrets.WEB_APP }}
+        images: ${{ secrets.DOCKER_CONTAINER_REGISTRY }}/${{ secrets.NOME_IMAGEM }}:latest
